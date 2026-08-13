@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class Header {
   title='Loja TP1';
+
+  exibirMensagem(msg: string): void {
+    alert(msg + ' clicado!');
+  }
 }
+
