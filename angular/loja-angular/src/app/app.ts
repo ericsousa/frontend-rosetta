@@ -12,4 +12,9 @@ import { Banner } from './core/banner/banner';
 })
 export class App {
   protected readonly title = signal('loja-angular');
+
+  sobre?: string;
+  receberSobre(msg: string): void {
+    this.sobre = msg;
+  }
 }
