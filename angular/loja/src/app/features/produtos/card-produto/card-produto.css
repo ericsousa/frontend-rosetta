@@ -80,3 +80,20 @@
 .btn.ghost:hover {
   background: #f9fafb;
 }
+
+.selo {
+  display: inline-block;
+  font-size: .75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.selo.novo { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+.selo.esgotado { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+.selo.promo { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

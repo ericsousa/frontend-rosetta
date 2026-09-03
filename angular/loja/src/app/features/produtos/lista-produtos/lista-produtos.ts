@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Produto } from '../../../model/produto';
 import { CardProduto } from '../card-produto/card-produto';
 
@@ -10,6 +10,22 @@ import { CardProduto } from '../card-produto/card-produto';
 })
 export class ListaProdutos {
 
+  // flag de exibir apeas produtos em promoção
+  apenasPromo = signal(false);
+
+  // cria a lista de produtos a ser exibida com base na flag apenasPromo
+  produtosExibidos = computed(() =>
+    this.apenasPromo()
+    ? this.produtos.filter(p => p.promo)
+    : this.produtos
+  );
+
+
+  // defie se exibe apenas promo ou não
+  altenarPromo() {
+    this.apenasPromo.update(v => !v); // Alterna o valor do sinal apenasPromo entre true e false
+  }
+  
   produtos = <Produto[]>[
     {
       id: 1,
