@@ -1,29 +1,25 @@
-:root {
-    --primary-color: #2f9e41;
-    --secondary-color: #f0f0f0;
-    --text-color: #333;
-    --container-max-width: 800px;
-}
-
 html,
 body {
-    height: 100%;
-    margin: 0;
+  height: 100%;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f9fafb;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
-    margin: 20px auto;
-    max-width: var(--container-max-width);
-    font-family: Arial, sans-serif;
-    text-align: center;
+app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-h2 {
-    color: var(--primary-color);
+app-footer {
+  margin-top: auto;
+  color: #fff;
+  text-align: center;
 }
