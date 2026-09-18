@@ -1,9 +1,12 @@
 import { inject, Injectable} from '@angular/core';
 import { LoggerService } from '../../../core/services/logger/logger.service';
-import { Produto } from '../../../model/produto';
+import { Produto, ProdutoMapper } from '../../../model/produto';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { delay } from 'rxjs/internal/operators/delay';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
     providedIn: 'root',
@@ -11,6 +14,9 @@ import { delay } from 'rxjs/internal/operators/delay';
 
 export class ProdutoService {
     private logger = inject(LoggerService);
+    private http = inject(HttpClient);
+
+    private apiUrl = 'https://fakestoreapi.com/products';
 
     private readonly listaMock = <Produto[]>[
     {
@@ -41,13 +47,27 @@ export class ProdutoService {
 
   listar(): Observable<Produto[]> {
     this.logger.info("[PRODUTO SERVICE] - Retornando lista de produtos")
-    return of(this.listaMock).pipe(
-        delay(250)
+
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(lista => lista.map(prod => ProdutoMapper.fromJson(prod))),
+      catchError((erro) => {
+        this.logger.error("[PRODUTO SERVICE] - Erro ao buscar lista de produtos", erro);
+        return of([]);
+      })
     );
   }
 
   getById(id: number): Observable<Produto | undefined>{
-    return of(this.listaMock.find(p => p.id === id)).pipe(delay(500));
+    this.logger.info("[PRODUTO SERVICE] - Retornando produto por ID: " + id)
+    //return of(this.listaMock.find(p => p.id === id)).pipe(delay(500));
+
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map(prod => ProdutoMapper.fromJson(prod)),
+      catchError((erro) => {
+        this.logger.error("[PRODUTO SERVICE] - Erro ao buscar produto por ID", erro);
+        return of(undefined);
+      })
+    );
   }
 
 }
