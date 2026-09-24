@@ -1,6 +1,22 @@
 <section class="catalogo">
     <header class="barradetarefas">
         <h2>Catálogo</h2>
+
+        <label for="categoria">Categoria:</label>
+        <select
+            id="categoria"
+            #seletorCategoria
+            [value]="categoriaSelecionada()"
+            (change)="categoriaSelecionada.set(seletorCategoria.value)"
+        >
+        <option value="">Todas as categorias</option>
+
+        @for (categoria of categoria(); track categoria) {
+            <option [value]="categoria">{{ categoria }}</option>
+        }
+        </select>
+
+
         <button type="butto" class="btn sopromo" [class.ativo]="apenasPromo()" (click)="altenarPromo()">
             @if (apenasPromo()) {
                 Mostrar Todos
@@ -12,6 +28,9 @@
 
     @if (carregando()) {
         <p class="carregando">Carregando produtos...</p>
+    }
+    @else if (erroAoCarregar()) {
+        <p>Erro ao carregar produtos. Tente novamente</p>
     }
     @else if (produtosExibidos().length === 0) {
         <p class="vazio">Nenhum produto encontrado.</p>

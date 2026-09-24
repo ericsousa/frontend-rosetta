@@ -45,14 +45,14 @@ export class ProdutoService {
     }
   ]
 
-  listar(): Observable<Produto[]> {
+  listar(): Observable<Produto[] | null> {
     this.logger.info("[PRODUTO SERVICE] - Retornando lista de produtos")
 
     return this.http.get<any[]>(this.apiUrl).pipe(
       map(lista => lista.map(prod => ProdutoMapper.fromJson(prod))),
       catchError((erro) => {
         this.logger.error("[PRODUTO SERVICE] - Erro ao buscar lista de produtos", erro);
-        return of([]);
+        return of(null);
       })
     );
   }
@@ -62,7 +62,7 @@ export class ProdutoService {
     //return of(this.listaMock.find(p => p.id === id)).pipe(delay(500));
 
     return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
-      map(prod => ProdutoMapper.fromJson(prod)),
+      map(prod => prod ? ProdutoMapper.fromJson(prod) : undefined),
       catchError((erro) => {
         this.logger.error("[PRODUTO SERVICE] - Erro ao buscar produto por ID", erro);
         return of(undefined);

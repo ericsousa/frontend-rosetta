@@ -20,7 +20,7 @@ export class ProdutoDetalhe {
  carregando = signal(true); 
  produto = signal<Produto | undefined> (undefined);
 
- construtor() {
+ constructor() {
   this.route.paramMap.subscribe( pm => {
     const id = pm.get('id') ? Number(pm.get('id')) : NaN;
     if(isNaN(id)){
@@ -38,7 +38,7 @@ export class ProdutoDetalhe {
 
  voltar() {
   //this.router.navigateByUrl('/produtos');
-  this.router.navigate(['/produtos']);
+  this.router.navigate(['/produto']);
  }
 
 }
