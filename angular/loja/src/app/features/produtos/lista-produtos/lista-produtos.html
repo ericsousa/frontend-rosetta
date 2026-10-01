@@ -2,28 +2,32 @@
     <header class="barradetarefas">
         <h2>Catálogo</h2>
 
-        <label for="categoria">Categoria:</label>
-        <select
-            id="categoria"
-            #seletorCategoria
-            [value]="categoriaSelecionada()"
-            (change)="categoriaSelecionada.set(seletorCategoria.value)"
-        >
-        <option value="">Todas as categorias</option>
+        <div class="acoes-header">
 
-        @for (categoria of categoria(); track categoria) {
-            <option [value]="categoria">{{ categoria }}</option>
-        }
-        </select>
+            <select
+                id="categoria"
+                #seletorCategoria
+                [value]="categoriaSelecionada()"
+                (change)="categoriaSelecionada.set(seletorCategoria.value)"
+            >
+                <option value="">Todas as categorias</option>
+                @for (categoria of categoria(); track categoria) {
+                    <option [value]="categoria">{{ categoria }}</option>
+                }
+            </select>
 
+            <button type="butto" class="btn sopromo" [class.ativo]="apenasPromo()" (click)="altenarPromo()">
+                @if (apenasPromo()) {
+                    Mostrar Todos
+                } @else {
+                    Promoções
+                }
+            </button>
 
-        <button type="butto" class="btn sopromo" [class.ativo]="apenasPromo()" (click)="altenarPromo()">
-            @if (apenasPromo()) {
-                Mostrar Todos
-            } @else {
-                Promoções
-            }
-        </button>
+            <button type="button" class="btn primary" (click)="onCreateProduct('/produto/novo')">
+                + Novo Produto
+            </button>>
+        </div>
     </header>
 
     @if (carregando()) {

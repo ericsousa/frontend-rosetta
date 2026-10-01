@@ -72,5 +72,7 @@ export class ListaProdutos {
     alert(`Adicionar ao carrinho o produto com id: ${produto.id} e quantidade: ${produto.qtd}`);
   }
 
-
+  onCreateProduct(rota: string) {
+    this.router.navigateByUrl(rota);
+  }
 }

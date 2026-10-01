@@ -19,8 +19,37 @@
 .barradetarefas {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 12px;
+}
+
+.barradetarefas h2 {
+  margin: 0 auto 0 0;
+}
+
+.barradetarefas label {
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.barradetarefas select {
+  min-width: 180px;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #374151;
+  font: inherit;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.barradetarefas select:focus-visible {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.16);
 }
 
 .btn.sopromo {
@@ -43,4 +72,19 @@
   border-radius: 8px;
   padding: 16px;
   text-align: center;
+}
+
+.btn.primary {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: grab;
+  background: #2f9e41;
+  color: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.acoes-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }

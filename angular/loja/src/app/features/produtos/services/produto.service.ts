@@ -18,33 +18,6 @@ export class ProdutoService {
 
     private apiUrl = 'https://fakestoreapi.com/products';
 
-    private readonly listaMock = <Produto[]>[
-    {
-      id: 1,
-      nome: 'Patola Mp055',
-      preco: 1001.00,
-      descricao: 'Patola Mp055 é uma patola de alta qualidade, preta.',
-      imageUrl: 'images/produto1.jpg',
-      promo: false
-    },
-    {
-      id: 2,
-      nome: 'Patola Mp055',
-      preco: 1002.00,
-      descricao: 'Patola Mp055 é uma patola de alta qualidade, azul.',
-      imageUrl: 'images/produto2.jpg',
-      promo: false
-    },
-    {
-      id: 3,
-      nome: 'Patola Mp055',
-      preco: 950.00,
-      descricao: 'Patola Mp055 é uma patola de alta qualidade, vermelha.',
-      imageUrl: 'images/produto3.jpg',
-      promo: true
-    }
-  ]
-
   listar(): Observable<Produto[] | null> {
     this.logger.info("[PRODUTO SERVICE] - Retornando lista de produtos")
 
@@ -68,6 +41,19 @@ export class ProdutoService {
         return of(undefined);
       })
     );
+  }
+
+  criar(produto: Produto): Observable<any> {
+
+    let body = {
+      title: produto.nome,
+      price: produto.preco,
+      description: produto.descricao,
+      image: produto.imageUrl,
+      category: produto.categoria
+    }
+
+    return this.http.post(this.apiUrl, ProdutoMapper.toJson(produto));;
   }
 
 }
