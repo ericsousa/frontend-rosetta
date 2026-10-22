@@ -24,7 +24,7 @@ export class CardProduto {
   // Ela emite um evento com o id do produto e a quantidade selecionada.
   onAdd() {
     // produto é um signal, então para pegar o valor dele, precisa chamar a função produto() 
-    this.add.emit({id: this.produto().id, qtd: this.quantidade()});
+    // this.add.emit({id: this.produto().id, qtd: this.quantidade()});
 
     // adicionar produto ao carrinho de compras, com a quantidade selecionada
     const p = this.produto(); // produto é um signal, então para pegar o valor dele, precisa chamar a função produto()
